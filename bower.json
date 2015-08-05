@@ -6,7 +6,6 @@
     "adam.schnaare@gmail.com <ba7O&GJzv%EmL&26>"
   ],
   "description": "Test runner widget for navTrack functionality",
-  "main": "src/navTrackTestRunner.html",
   "license": "MIT",
   "ignore": [
     "**/.*",
