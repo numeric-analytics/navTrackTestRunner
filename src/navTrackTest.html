@@ -1,0 +1,159 @@
+<style>
+    .navTrackTest{
+        position: fixed;
+        display: inline-block;
+        width: 300px;
+        padding: 20px;
+        background: #eee;
+        border: 1px solid #333;
+        border-radius: 4px;
+        top: 20px;
+        right: 20px;
+        z-index: 30000;
+        box-shadow: 2px 5px 10px 3px rgba(0,0,0,0.75);
+    }
+    .navTrackTest hr{color: #222; border-color: #222;}
+    .navTrackTest button{margin-bottom: 10px;}
+</style>
+<script>
+    var ntTest = {
+        logMessage: function (msg,pass,failedEver){
+            if ( pass && !failedEver ){
+                console.log(msg + ': ' + pass);
+            } else {
+                console.log(msg + ': ' + 'fail, see above for failed');
+            }
+        },
+        sectionsHaveRegions: function () {
+            var pass = false;
+            var failedEver = false;
+            $(document).find('[data-linkcontainer="lt_section"]').each(function () {
+                if( !$(this).closest('[data-linkcontainer="lt_region"]').length > 0 ){
+                    failedEver = true;
+                    console.log(this);
+                } else{
+                    pass = true;
+                }
+            });
+            ntTest.logMessage('Each Section has a region',pass,failedEver);
+        },
+        containersHaveText: function () {
+            var pass = false;
+            var failedEver = false;
+            $(document).find('[data-linkcontainer]').each(function () {
+                var text = $(this).attr('data-tracklinktext');
+                if ( text == undefined || text == ''){
+                    failedEver = true;
+                    console.log(this);
+                } else{
+                    pass = true;
+                }
+            });
+            ntTest.logMessage('Each Container has text',pass,failedEver);
+        },
+        linksHaveText: function () {
+            var pass = false;
+            var failedEver = false;
+            $(document).find('[data-linktrack="true"]').each(function () {
+                var text = $(this).attr('data-tracklinktext');
+                if ( text == undefined || text == ''){
+                    failedEver = true;
+                    console.log(this);
+                } else{
+                    pass = true;
+                }
+            });
+            ntTest.logMessage('Each Link has a text',pass,failedEver);
+        },
+        linksHaveRegions: function () {
+            var pass = false;
+            var failedEver = false;
+            $(document).find('[data-linktrack="true"]').each(function () {
+                if( !$(this).closest('[data-linkcontainer="lt_region"]').length > 0 ){
+                    failedEver = true;
+                    console.log(this);
+                } else{
+                    pass = true;
+                }
+            });
+            ntTest.logMessage('Each Link has a region',pass,failedEver);
+        },
+        formsHaveText: function () {
+            var pass = false;
+            var failedEver = false;
+            var $items = $(document).find('[data-linktrackform="true"]');
+            $items.each(function () {
+                var text = $(this).attr('data-tracklinktext');
+                if ( text == undefined || text == ''){
+                    failedEver = true;
+                    console.log(this);
+                } else{
+                    pass = true;
+                }
+            });
+            if ($items.length > 0){
+                ntTest.logMessage('Each Form has text',pass,failedEver);
+            } else {
+                console.log('Each Form has text: ' + 'No Forms Present');
+            }
+        },
+        formsHaveLinkBlocking: function () {
+            var pass = false;
+            var failedEver = false;
+            var $items = $(document).find('[data-linktrackform="true"]');
+            $items.each(function () {
+                var text = $(this).attr('data-linkblocking');
+                if ( text == undefined || text == '' || text == false){
+                    failedEver = true;
+                    console.log(this);
+                } else{
+                    pass = true;
+                }
+            });
+            if ($items.length > 0){
+                ntTest.logMessage('Each Form has link blocking',pass,failedEver);
+            } else {
+                console.log('Each Form has link blocking: ' + 'No Forms Present');
+            }
+        },
+        youTubeHasBlocking: function () {
+            var pass = false;
+            var failedEver = false;
+            var $items = $(document).find('[href*="youtube"]');
+            $items.each(function () {
+                var text = $(this).attr('data-linkblocking');
+                if ( text == undefined || text == '' || text == false){
+                    failedEver = true;
+                    console.log(this);
+                } else{
+                    pass = true;
+                }
+            });
+            if ($items.length > 0){
+                ntTest.logMessage('Each Video has link blocking',pass,failedEver);
+            } else {
+                console.log('Each Video has link blocking: ' + 'No Forms Present');
+            }
+        }
+    };
+</script>
+<div class="navTrackTest">
+    <h2>navTrackTest Runner</h2>
+    <button onclick="
+    ntTest.sectionsHaveRegions();
+    ntTest.containersHaveText();
+    ntTest.linksHaveText();
+    ntTest.linksHaveRegions();
+    ntTest.formsHaveText();
+    ntTest.formsHaveLinkBlocking();
+    ntTest.youTubeHasBlocking();
+    ">All Tests</button>
+    <h3>Specific Tests</h3>
+    <button onclick="ntTest.sectionsHaveRegions()">Sections Have Regions</button><br>
+    <button onclick="ntTest.containersHaveText()">Containers Have Text</button><br>
+    <button onclick="ntTest.linksHaveText()">Links Have Text</button><br>
+    <button onclick="ntTest.linksHaveRegions()">Links Have Regions</button><br>
+    <button onclick="ntTest.formsHaveText()">Forms Have Text</button><br>
+    <button onclick="ntTest.formsHaveLinkBlocking()">Forms Have Link Blocking</button><br>
+    <button onclick="ntTest.youTubeHasBlocking()">Videos Have Link Blocking</button><br>
+</div>

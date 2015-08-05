@@ -1,0 +1,18 @@
+{
+  "name": "navTrackTestRunner",
+  "version": "1.0.0",
+  "homepage": "https://github.com/numeric-analytics/navTrackTestRunner",
+  "authors": [
+    "adam.schnaare@gmail.com <ba7O&GJzv%EmL&26>"
+  ],
+  "description": "Test runner widget for navTrack functionality",
+  "main": "src/navTrackTestRunner.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
